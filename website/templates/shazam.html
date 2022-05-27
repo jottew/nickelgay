@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,37 +63,31 @@
           </div>
           <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent rounded-lg text-black p-4 lg:p-0 z-20" id="nav-content">
             <ul class="list-reset lg:flex justify-end flex-1 items-center">
-              <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="../">Home</a>
-              </li>
-              <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/download">Download</a>
-              </li>
-              <li class="mr-3">
-                <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="/shazam">Shazam</a>
-              </li>
-              <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/effects">Effects</a>
-              </li>
-              {% if user.is_staff %}
-              <li class="mr-3">
-                  <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/admin">Admin</a>
-              </li>
-              {% endif %}
-              {% if user.is_authenticated %}
-              <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/logout">Logout</a>
-              </li>
-              {% else %}
-              <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/login">Login</a>
-              </li>
-              {% endif %}
+              {% for name, href in nav %}
+                <li class="mr-3">
+                  <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ href }}">{{ name }}</a>
+                </li>
+              {% endfor %}
             </ul>
           </div>
         </div>
-        <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
-      </nav>
+      <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
+    </nav>
+
+    <script>
+      navContent = document.getElementById("nav-content")
+      ul = navContent.childNodes[1]
+      path = "{{ request.get_full_path }}"
+      for (const property in ul.childNodes) {
+        if (ul.childNodes[property].nodeName === "LI") {
+          item = ul.childNodes[property].childNodes[1]
+          href = new URL(item.href)
+          if (href.pathname === (path)) {
+            item.classList = "inline-block py-2 px-4 text-black font-bold no-underline"
+          }
+        }
+      }
+    </script>
 
     <div class="px-2">
         <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">

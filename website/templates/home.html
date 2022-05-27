@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,65 +23,71 @@
     </style>
   </head>
   <body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
-    <!--Nav-->
     <nav id="header" class="fixed bg-white rounded-b-lg w-full z-30 top-0 text-white">
-      <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
-        <div class="pl-4 flex items-center">
-          <a class="toggleColour text-black no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="../">
-            nickel.gay
-          </a>
+        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+          <div class="pl-4 flex items-center">
+            <a class="toggleColour text-black no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="../">
+              nickel.gay
+            </a>
+          </div>
+          <div class="block lg:hidden pr-4">
+            <button id="nav-toggle" class="flex items-center p-1 text-pink-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+              <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <title>Menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+              </svg>
+            </button>
+          </div>
+          <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent rounded-lg text-black p-4 lg:p-0 z-20" id="nav-content">
+            <ul class="list-reset lg:flex justify-end flex-1 items-center">
+              {% for name, href in nav %}
+                <li class="mr-3">
+                  <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="{{ href }}">{{ name }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
-        <div class="block lg:hidden pr-4">
-          <button id="nav-toggle" class="flex items-center p-1 text-pink-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-            <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <title>Menu</title>
-              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-            </svg>
-          </button>
-        </div>
-        <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent rounded-lg text-black p-4 lg:p-0 z-20" id="nav-content">
-          <ul class="list-reset lg:flex justify-end flex-1 items-center">
-            <li class="mr-3">
-              <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="../">Home</a>
-            </li>
-            <li class="mr-3">
-              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/download">Download</a>
-            </li>
-            <li class="mr-3">
-              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/shazam">Shazam</a>
-            </li>
-            <li class="mr-3">
-              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/effects">Effects</a>
-            </li>
-            {% if user.is_staff %}
-            <li class="mr-3">
-                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/admin">Admin</a>
-            </li>
-            {% endif %}
-            {% if user.is_authenticated %}
-            <li class="mr-3">
-              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/logout">Logout</a>
-            </li>
-            {% else %}
-            <li class="mr-3">
-              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/login">Login</a>
-            </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
       <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
     </nav>
-    <!--Hero-->
+
+    <script>
+      navContent = document.getElementById("nav-content")
+      ul = navContent.childNodes[1]
+      path = "{{ request.get_full_path }}"
+      for (const property in ul.childNodes) {
+        if (ul.childNodes[property].nodeName === "LI") {
+          item = ul.childNodes[property].childNodes[1]
+          href = new URL(item.href)
+          if (href.pathname === (path)) {
+            item.classList = "inline-block py-2 px-4 text-black font-bold no-underline"
+          }
+        }
+      }
+    </script>
+
+    <script>
+      navContent = document.getElementById("nav-content")
+      ul = navContent.childNodes[1]
+      path = "{{ request.get_full_path }}"
+      for (const property in ul.childNodes) {
+        if (ul.childNodes[property].nodeName === "LI") {
+          item = ul.childNodes[property].childNodes[1]
+          href = new URL(item.href)
+          if (href.pathname === (path) && host === href.host) {
+            item.classList = "inline-block py-2 px-4 text-black font-bold no-underline"
+          }
+        }
+      }
+    </script>
     <div class="pt-24">
       <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-        <!--Left Col-->
         <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
           <h1 class="my-4 text-5xl font-bold leading-tight">
-            Das schweizer Messer der Medien Tools
+            {% trans 'The swiss knife of media tools' %}
           </h1>
           <p class="leading-normal text-2xl mb-8">
-            Lade Videos runter, Shazam Audios und füge Effekte zu Audios hinzu
+            {% trans 'Download Videos, shazam audios and apply effects to audios' %}
           </p>
         </div>
         <!--Right Col-->
@@ -111,7 +118,7 @@
     <section class="bg-white border-b py-8">
       <div class="container max-w-5xl mx-auto m-8">
         <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-          Features
+          {% trans 'Features' %}
         </h1>
         <div class="w-full mb-4">
           <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
@@ -119,20 +126,20 @@
         <div class="sm:flex justify-center items-center">
           <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
             <a href="download" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Downloading</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Lade Videos von TikTok, YouTube, Twitter und Reddit runter oder Songs von SoundCloud oder Roblox</p>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{% trans 'Downloading' %}</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{% trans 'Download Videos from TikTok, YouTube, Twitter and Reddit or Songs from SoundCloud or the Roblox marketplace' %}</p>
             </a>
           </div>
           <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
             <a href="shazam" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Shazam</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Finde heraus welches Lied in einer Audio oder Video datei läuft</p>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{% trans 'Shazam' %}</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{% trans 'Recognize the song playing in a video or audio file' %}</p>
             </a>
           </div>
           <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
             <a href="effects" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Effects</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Füge Effekte zu Video und Audio Dateien hinzu</p>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{% trans 'Effects' %}</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{% trans 'Apply effects to audio files' %}</p>
             </a>
           </div>
         </div>
