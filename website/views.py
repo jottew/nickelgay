@@ -1,10 +1,10 @@
 import json
 
 from django.http import *
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .api import valid_filetypes
 from django.contrib.auth.decorators import login_required
-from django.utils.translation import gettext
+from django.utils.translation import gettext, activate, get_language_info
 
 platforms = {
     "YouTube": "YouTube",

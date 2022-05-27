@@ -7,6 +7,7 @@ import aiofiles
 import asyncio
 
 from django.http import HttpRequest, HttpResponse
+from django.contrib.auth.decorators import login_required
 import mimetypes
 
 valid_filetypes = [
@@ -27,6 +28,7 @@ async def shell(code):
     return stdout.decode(), stderr.decode()
 
 
+@login_required
 async def download_view(request: HttpRequest):
     if not request.user.is_authenticated:
         return HttpResponse("Not logged in", status=403)

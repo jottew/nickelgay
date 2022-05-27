@@ -102,7 +102,7 @@
             var videoButton = document.querySelector('#TypeVideoButton');
             var videoButtonParent = document.querySelector('#TypeButtons');
             const svg = button.lastElementChild;
-            button.innerText = `Plattform (${input})`
+            button.innerText = `{% trans 'Platform' %} (${input})`
             button.appendChild(svg);
 
             if (audios.includes(input)) {
@@ -115,10 +115,8 @@
         }
 
         function setType(input) {
-            console.log(input);
             var type = input;
             button = document.querySelector('#TypeDDDividerButton');
-            console.log(button);
             bitrate = document.querySelector('#Bitrate');
             resolution = document.querySelector('#ResolutionDD');
             if (input.toLowerCase() == "audio") {
@@ -129,8 +127,7 @@
               bitrate.classList.add("hidden");
             }
             const svg = button.lastElementChild;
-            console.log(button.innerText);
-            button.innerText = `Typ (${input})`
+            button.innerText = `{% trans 'Type' %} (${input})`
             button.appendChild(svg);
         }
 
@@ -138,7 +135,7 @@
             var resolution = input;
             button = document.querySelector('#ResolutionDDDividerButton');
             const svg = button.lastElementChild;
-            button.innerText = `Auflösung (${input}p)`
+            button.innerText = `{% trans 'Resolution' %} (${input}p)`
             button.appendChild(svg);
         }
     </script>
@@ -147,7 +144,7 @@
         <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
             <section class="flex items-center flex-col">
                 <h3 class="font-bold text-2xl">Download</h3>
-                <p class="text-gray-600 pt-2 text-center">Downloade TikTok Videos (ohne das Wasserzeichen), YouTube, Twitter oder Reddit Videos oder SoundCloud und Roblox Songs</p>
+                <p class="text-gray-600 pt-2 text-center">{% trans 'Download TikTok Videos (without watermark), YouTube, Twitter or Reddit videos or SoundCloud and Roblox songs' %}</p>
             </section>
     
             <section class="space-y-2 items-center">
@@ -161,7 +158,7 @@
                 <div class="sm:flex justify-center items-stretch sm:space-x-2 sm:space-y-0 space-y-2">
                   <section id="PlatformDD" class="flex justify-center items-center space-x-2">
                     <button id="PlatformDDDividerButton" data-dropdown-toggle="PlatformDropdownDivider" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700" type="button">
-                        Plattform
+                      {% trans 'Platform' %}
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
@@ -180,7 +177,7 @@
                   </section>
                   <section id="TypeDD" class="flex justify-center items-center space-x-2">
                     <button id="TypeDDDividerButton" data-dropdown-toggle="TypeDropdownDivider" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700" type="button">
-                        Typ
+                        {% trans 'Type' %}
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
@@ -199,7 +196,7 @@
                   </section>
                   <section id="ResolutionDD" class="flex justify-center items-center space-x-2">
                     <button id="ResolutionDDDividerButton" data-dropdown-toggle="ResolutionDropdownDivider" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700" Resolution="button">
-                        Auflösung
+                        {% trans 'Resolution' %}
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
@@ -218,13 +215,13 @@
                   </section>
 
                   <div class="flex justify-center items-center hidden" id="Bitrate">
-                    <input type="number" id="bitrate" class="text-white placeholder-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700" placeholder="Bitrate" required>
+                    <input type="number" id="bitrate" class="text-white placeholder-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700" placeholder="{% trans 'Bitrate' %}" required>
                   </div>
                 </div>
     
                 <div class="flex items-center flex-col mt-8">
                   <button onclick="void(0);" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center">
-                    Download
+                    {% trans 'Download' %}
                   </button>
                 </div>
             </section>

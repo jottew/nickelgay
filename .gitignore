@@ -3,3 +3,5 @@
 db.sqlite3
 .idea/
 website/locale/
+node_modules/
+theme/

@@ -3,10 +3,11 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.urls import path
 from django.views.generic.base import RedirectView
 
-from . import views, api
+from . import views, api, account
 
 urlpatterns = [
     path("", views.home_view),
+    path("account/", account.home_view),
     path("shazam/", views.shazam_view),
     path("effects/", views.effects_view),
     path("download/", views.download_view),

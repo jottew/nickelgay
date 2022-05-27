@@ -141,8 +141,8 @@
     <div class="px-2">
         <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
             <section class="flex items-center flex-col">
-                <h3 class="font-bold text-2xl">Effects</h3>
-                <p class="text-gray-600 pt-2 text-center">Füge Effects zu Video oder Audio Dateien hinzu</p>
+                <h3 class="font-bold text-2xl">{% trans 'Effects' %}</h3>
+                <p class="text-gray-600 pt-2 text-center">{% trans 'Apply effects to audio files' %}</p>
             </section>
     
             <section class="flex items-center flex-col mt-8">
@@ -165,15 +165,15 @@
               </section>
 
               <p class="mt-1 text-sm hidden" id="InvalidFile">
-                Das Format der gegeben Datei ist noch nicht unterstützt
+                {% trans 'This filetype isn\'t yet supported' %}
               </p>
 
               <p class="mt-1 text-sm hidden" id="NoFile">
-                Keine Datei wurde gegeben
+                {% trans 'No file was inputted' %}
               </p>
     
               <button onclick="applyEffects()" class="text-white mt-4 bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">
-                  Hinzufügen
+                {% trans 'Apply' %}
               </button>
 
               <video id="ResultVideo" controls class="rounded-lg mt-4 hidden">
