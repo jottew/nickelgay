@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:title" content="nickel.gay | Download" />
+    <meta property="og:site_name" content="nickel.gay" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="The swiss knife of media utility" />
+    <meta property="og:url" content="https://nickel.gay" />
+    <meta property="theme-color" content="#9921E8" />
+    <meta property="og:image" content="https://nickel.gay/static/favicon.png" />
+    <title>nickel.gay</title>
+    <link rel="icon" type="image/x-icon" href="static/favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/static/favicon.png"/>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
+    <script>
+        tailwind.config = {
+          theme: {
+            fontSize: {
+                'xs': '.75rem',
+                'sm': '.875rem',
+                'tiny': '.875rem',
+                'base': '1rem',
+                'lg': '1.125rem',
+                'xl': '1.25rem',
+                '2xl': '1.5rem',
+                '3xl': '1.875rem',
+                '4xl': '2.25rem',
+                '5xl': '3rem',
+                '6xl': '4rem',
+                '7xl': '5rem',
+              }
+            }
+          }
+    </script>
+    <style>
+        .body-bg {
+            background-color: #9921e8;
+            background-image: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);
+        }
+    </style>
+</head>
+<body class="body-bg min-h-screen pt-12 md:pt-20 pb-6 md:px-0" style="font-family:'Lato',sans-serif;">
+    <nav id="header" class="fixed bg-white rounded-b-lg w-full z-30 top-0 text-white">
+        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+          <div class="pl-4 flex items-center">
+            <a class="toggleColour text-black no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="../">
+              nickel.gay
+            </a>
+          </div>
+          <div class="block lg:hidden pr-4">
+            <button id="nav-toggle" class="flex items-center p-1 text-pink-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+              <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <title>Menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+              </svg>
+            </button>
+          </div>
+          <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent rounded-lg text-black p-4 lg:p-0 z-20" id="nav-content">
+            <ul class="list-reset lg:flex justify-end flex-1 items-center">
+              <li class="mr-3">
+                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="../">Home</a>
+              </li>
+              <li class="mr-3">
+                <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="/download">Download</a>
+              </li>
+              <li class="mr-3">
+                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/shazam">Shazam</a>
+              </li>
+              <li class="mr-3">
+                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/effects">Effects</a>
+              </li>
+              {% if user.is_staff %}
+              <li class="mr-3">
+                  <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/admin">Admin</a>
+              </li>
+              {% endif %}
+              {% if user.is_authenticated %}
+              <li class="mr-3">
+                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/logout">Logout</a>
+              </li>
+              {% else %}
+              <li class="mr-3">
+                <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/login">Login</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+        <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
+      </nav>
+
+    <script>
+        function addEffect(nickel) {
+            console.log(nickel)
+        }
+
+        function setPlatform(input) {
+            var platform = input;
+            let audios = Array("SoundCloud", "Roblox")
+            button = document.querySelector('#PlatformDDDividerButton');
+            var videoButton = document.querySelector('#TypeVideoButton');
+            var videoButtonParent = document.querySelector('#TypeButtons');
+            const svg = button.lastElementChild;
+            button.innerText = `Plattform (${input})`
+            button.appendChild(svg);
+
+            if (audios.includes(input)) {
+              videoButton.classList.add("hidden");
+              setType("Audio");
+            } else {
+              videoButton.classList.remove("hidden");
+              setType("Video");
+            }
+        }
+
+        function setType(input) {
+            console.log(input);
+            var type = input;
+            button = document.querySelector('#TypeDDDividerButton');
+            console.log(button);
+            bitrate = document.querySelector('#Bitrate');
+            resolution = document.querySelector('#ResolutionDD');
+            if (input.toLowerCase() == "audio") {
+              resolution.classList.add("hidden");
+              bitrate.classList.remove("hidden");
+            } else if (input.toLowerCase() == "video") {
+              resolution.classList.remove("hidden");
+              bitrate.classList.add("hidden");
+            }
+            const svg = button.lastElementChild;
+            console.log(button.innerText);
+            button.innerText = `Typ (${input})`
+            button.appendChild(svg);
+        }
+
+        function setResolution(input) {
+            var resolution = input;
+            button = document.querySelector('#ResolutionDDDividerButton');
+            const svg = button.lastElementChild;
+            button.innerText = `Auflösung (${input}p)`
+            button.appendChild(svg);
+        }
+    </script>
+
+    <div class="px-2">
+        <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+            <section class="flex items-center flex-col">
+                <h3 class="font-bold text-2xl">Download</h3>
+                <p class="text-gray-600 pt-2 text-center">Downloade TikTok Videos (ohne das Wasserzeichen), YouTube, Twitter oder Reddit Videos oder SoundCloud und Roblox Songs</p>
+            </section>
+    
+            <section class="space-y-2 items-center">
+                <form>
+                    <div class="mb-6 pt-3 rounded">
+                        <label class="block text-gray-700 text-sm font-bold mb-2 ml-1" for="url">URL</label>
+                        <input type="text" name="url" autofocus="" id="url" required="" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3">
+                    </div>
+                </form>
+
+                <div class="sm:flex justify-center items-stretch sm:space-x-2 sm:space-y-0 space-y-2">
+                  <section id="PlatformDD" class="flex justify-center items-center space-x-2">
+                    <button id="PlatformDDDividerButton" data-dropdown-toggle="PlatformDropdownDivider" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700" type="button">
+                        Plattform
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="PlatformDropdownDivider" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                      <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="PlatformDDDividerButton">
+                        <li>
+                          {% for i,v in platforms %}
+                          <button id="Platform{{ v }}Button" onclick="setPlatform('{{ v }}')" value="YouTube" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            {{ i }}
+                          </button>
+                          {% endfor %}
+                        </li>
+                      </ul>
+                    </div>
+                  </section>
+                  <section id="TypeDD" class="flex justify-center items-center space-x-2">
+                    <button id="TypeDDDividerButton" data-dropdown-toggle="TypeDropdownDivider" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700" type="button">
+                        Typ
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="TypeDropdownDivider" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                      <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="TypeDDDividerButton">
+                        <li id="TypeButtons">
+                          {% for i in types %}
+                          <button id="Type{{ i }}Button" onclick="setType('{{ i }}')" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            {{ i }}
+                          </button>
+                          {% endfor %}
+                        </li>
+                      </ul>
+                    </div>
+                  </section>
+                  <section id="ResolutionDD" class="flex justify-center items-center space-x-2">
+                    <button id="ResolutionDDDividerButton" data-dropdown-toggle="ResolutionDropdownDivider" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700" Resolution="button">
+                        Auflösung
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="ResolutionDropdownDivider" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                      <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="ResolutionDDDividerButton">
+                        <li>
+                          {% for i in resolutions %}
+                          <button id="Resolution{{ i }}Button" onclick="setResolution('{{ i }}')" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            {{ i }}p
+                          </button>
+                          {% endfor %}
+                        </li>
+                      </ul>
+                    </div>
+                  </section>
+
+                  <div class="flex justify-center items-center hidden" id="Bitrate">
+                    <input type="number" id="bitrate" class="text-white placeholder-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700" placeholder="Bitrate" required>
+                  </div>
+                </div>
+    
+                <div class="flex items-center flex-col mt-8">
+                  <button onclick="void(0);" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center">
+                    Download
+                  </button>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        /*Toggle dropdown list*/
+        /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
+  
+        var navMenuDiv = document.getElementById("nav-content");
+        var navMenu = document.getElementById("nav-toggle");
+  
+        document.onclick = check;
+        function check(e) {
+          var target = (e && e.target) || (event && event.srcElement);
+  
+          //Nav Menu
+          if (!checkParent(target, navMenuDiv)) {
+            // click NOT on the menu
+            if (checkParent(target, navMenu)) {
+              // click on the link
+              if (navMenuDiv.classList.contains("hidden")) {
+                navMenuDiv.classList.remove("hidden");
+              } else {
+                navMenuDiv.classList.add("hidden");
+              }
+            } else {
+              // click both outside link and outside menu, hide menu
+              navMenuDiv.classList.add("hidden");
+            }
+          }
+        }
+        function checkParent(t, elm) {
+          while (t.parentNode) {
+            if (t == elm) {
+              return true;
+            }
+            t = t.parentNode;
+          }
+          return false;
+        }
+      </script>
+      <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
+</body>
+</html>

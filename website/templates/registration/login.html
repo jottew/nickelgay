@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:title" content="nickel.gay | Login" />
+    <meta property="og:site_name" content="nickel.gay" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="The swiss knife of media utility" />
+    <meta property="og:url" content="https://nickel.gay" />
+    <meta property="theme-color" content="#9921E8" />
+    <meta property="og:image" content="https://nickel.gay/static/favicon.png" />
+    <title>nickel.gay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/static/favicon.png"/>
+    <style>
+        .body-bg {
+            background-color: #9921e8;
+            background-image: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);
+        }
+    </style>
+</head>
+<body class="body-bg min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0" style="font-family:'Lato',sans-serif;">
+
+    <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+        <section>
+            <h3 class="font-bold text-2xl">Willkommen bei nickel.gay</h3>
+            <p class="text-gray-600 pt-2">Logge dich in deinen Account ein</p>
+        </section>
+
+        <section class="mt-10">
+            <form class="flex flex-col" method="POST">
+                {% csrf_token %}{{form.non_field_errors}}
+
+                <div class="mb-6 pt-3 rounded bg-gray-200">
+                    <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="email">Username</label>
+                    <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" id="username" required="" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3">
+                </div>
+                <div class="mb-6 pt-3 rounded bg-gray-200">
+                    <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="password">Password</label>
+                    <input type="password" name="password" autocomplete="current-password" id="password" required="" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3">
+                </div>
+                <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Einloggen</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
