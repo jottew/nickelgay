@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load tailwind_tags %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,11 +13,12 @@
     <meta property="og:description" content="The swiss knife of media utility" />
     <meta property="og:url" content="https://nickel.gay" />
     <meta property="theme-color" content="#9921E8" />
-    <meta property="og:image" id="meta-image" content="https://nickel.gay/static/favicon.png" />
+    <meta property="og:image" id="meta-image" content="{% static 'favicon.png' %}" />
     <title>nickel.gay</title>
+    
     {% tailwind_css %}
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet" />
-    <link rel="icon" type="image/png" href="/static/favicon.png"/>
+    <link rel="icon" type="image/png" href="{% static 'favicon.png' %}"/>
     <style>
       .gradient {
         background: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);
@@ -66,12 +68,8 @@
           }
         }
       }
-
-      metaImage = document.getElementById("meta-image")
-      url = new URL("{{ request.get_host }}")
-      metaImage.content = `http://${url.href}/static/favicon.png`
     </script>
-    
+
     <div class="pt-24">
       <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
@@ -158,48 +156,6 @@
         </g>
       </g>
     </svg>
-    <script>
-      var scrollpos = window.scrollY;
-      var header = document.getElementById("header");
-      var navcontent = document.getElementById("nav-content");
-      var navaction = document.getElementById("navAction");
-      var brandname = document.getElementById("brandname");
-      var toToggle = document.querySelectorAll(".toggleColour");
-
-      document.addEventListener("scroll", function () {
-        /*Apply classes for slide in bar*/
-        scrollpos = window.scrollY;
-
-        if (scrollpos > 10) {
-          navaction.classList.remove("bg-white");
-          navaction.classList.add("gradient");
-          navaction.classList.remove("text-gray-800");
-          navaction.classList.add("text-white");
-          //Use to switch toggleColour colours
-          for (var i = 0; i < toToggle.length; i++) {
-            toToggle[i].classList.add("text-gray-800");
-            toToggle[i].classList.remove("text-white");
-          }
-          header.classList.add("shadow");
-          navcontent.classList.remove("bg-gray-100");
-          navcontent.classList.add("bg-white");
-        } else {
-          navaction.classList.remove("gradient");
-          navaction.classList.add("bg-white");
-          navaction.classList.remove("text-white");
-          navaction.classList.add("text-gray-800");
-          //Use to switch toggleColour colours
-          for (var i = 0; i < toToggle.length; i++) {
-            toToggle[i].classList.add("text-white");
-            toToggle[i].classList.remove("text-gray-800");
-          }
-
-          header.classList.remove("shadow");
-          navcontent.classList.remove("bg-white");
-          navcontent.classList.add("bg-gray-100");
-        }
-      });
-    </script>
     <script>
       /*Toggle dropdown list*/
       /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
