@@ -143,4 +143,5 @@ LOGOUT_REDIRECT_URL = "/"
 # Tailwind
 
 TAILWIND_APP_NAME = 'theme'
-NPM_BIN_PATH = os.getenv("NPM_BIN_PATH")
+if os.getenv("NPM_BIN_PATH"):
+    NPM_BIN_PATH = os.getenv("NPM_BIN_PATH")
