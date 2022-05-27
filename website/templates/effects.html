@@ -131,61 +131,67 @@
       if (ul.childNodes[property].nodeName === "LI") {
         item = ul.childNodes[property].childNodes[1]
         href = new URL(item.href)
-        if (href.pathname === (path)) {
+        host = "{{ request.get_host }}"
+        if (href.pathname === (path) && host === href.host) {
           item.classList = "inline-block py-2 px-4 text-black font-bold no-underline"
         }
       }
     }
+
+    metaImage = document.getElementById("meta-image")
+    url = new URL("{{ request.get_host }}")
+    metaImage.content = `http://${url.href}/static/favicon.png`
   </script>
 
-    <div class="px-2">
-        <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
-            <section class="flex items-center flex-col">
-                <h3 class="font-bold text-2xl">{% trans 'Effects' %}</h3>
-                <p class="text-gray-600 pt-2 text-center">{% trans 'Apply effects to audio files' %}</p>
-            </section>
+  <div class="px-2">
+      <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+          <section class="flex items-center flex-col">
+              <h3 class="font-bold text-2xl">{% trans 'Effects' %}</h3>
+              <p class="text-gray-600 pt-2 text-center">{% trans 'Apply effects to audio files' %}</p>
+          </section>
+  
+          <section class="flex items-center flex-col mt-8">
+            <input 
+              class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+              aria-describedby="file_input_help"
+              id="file_input"
+              type="file"
+              accept="audio/*,video/*"
+            >
+            <p class="mt-1 text-sm" id="file_input_help">{{ valid_types }}</p>
+          </section>
+
+          <section class="flex items-center flex-col mt-8">
+            {% for i,v in effects %}
+              <div class="flex items-center mb-4">
+                <input id="default-radio-1" onclick="if (this.checked === true) {effects.push('{{ i }}');} else {effects.splice(effects.indexOf('{{ i }}'), 1)}"  type="checkbox" value="" name="default-radio" class="rounded-lg w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-1" class="ml-2 text-sm font-bold text-black">{{ v }}</label>
+              </div>
+            {% endfor %}
+          </section>
+
+            <p class="mt-1 text-sm hidden" id="InvalidFile">
+              {% trans 'This filetype isn\'t yet supported' %}
+            </p>
+
+            <p class="mt-1 text-sm hidden" id="NoFile">
+              {% trans 'No file was inputted' %}
+            </p>
     
-            <section class="flex items-center flex-col mt-8">
-              <input 
-                class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                aria-describedby="file_input_help"
-                id="file_input"
-                type="file"
-                accept="audio/*,video/*"
-              >
-              <p class="mt-1 text-sm" id="file_input_help">{{ valid_types }}</p>
+            <button onclick="applyEffects()" class="text-white mt-4 bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">
+              {% trans 'Apply' %}
+            </button>
 
-              <section class="flex items-center flex-col mt-8">
-                {% for i,v in effects %}
-                  <div class="flex items-center mb-4">
-                    <input id="default-radio-1" onclick="if (this.checked === true) {effects.push('{{ i }}');} else {effects.splice(effects.indexOf('{{ i }}'), 1)}"  type="checkbox" value="" name="default-radio" class="rounded-lg w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="default-radio-1" class="ml-2 text-sm font-bold text-black">{{ v }}</label>
-                  </div>
-                {% endfor %}
-              </section>
+            <video id="ResultVideo" controls class="rounded-lg mt-4 hidden">
+              <source src="" type="video/mp4">
+            goofy ahh browser 💀
+            </video>
 
-              <p class="mt-1 text-sm hidden" id="InvalidFile">
-                {% trans 'This filetype isn\'t yet supported' %}
-              </p>
-
-              <p class="mt-1 text-sm hidden" id="NoFile">
-                {% trans 'No file was inputted' %}
-              </p>
-    
-              <button onclick="applyEffects()" class="text-white mt-4 bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">
-                {% trans 'Apply' %}
-              </button>
-
-              <video id="ResultVideo" controls class="rounded-lg mt-4 hidden">
-                <source src="" type="video/mp4">
-              goofy ahh browser 💀
-              </video>
-
-              <audio id="ResultAudio" controls class="rounded-lg mt-4 hidden">
-                <source src="" type="audio/mp3">
-              goofy ahh browser 💀
-              </audio>
-            </section>
+            <audio id="ResultAudio" controls class="rounded-lg mt-4 hidden">
+              <source src="" type="audio/mp3">
+            goofy ahh browser 💀
+            </audio>
+          </section>
         </main>
     </div>
     <script>

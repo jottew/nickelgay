@@ -82,11 +82,16 @@
         if (ul.childNodes[property].nodeName === "LI") {
           item = ul.childNodes[property].childNodes[1]
           href = new URL(item.href)
-          if (href.pathname === (path)) {
+          host = "{{ request.get_host }}"
+          if (href.pathname === (path) && host === href.host) {
             item.classList = "inline-block py-2 px-4 text-black font-bold no-underline"
           }
         }
       }
+  
+      metaImage = document.getElementById("meta-image")
+      url = new URL("{{ request.get_host }}")
+      metaImage.content = `http://${url.href}/static/favicon.png`
     </script>
 
     <div class="px-2">

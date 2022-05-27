@@ -12,7 +12,7 @@
     <meta property="og:description" content="The swiss knife of media utility" />
     <meta property="og:url" content="https://nickel.gay" />
     <meta property="theme-color" content="#9921E8" />
-    <meta property="og:image" content="https://nickel.gay/static/favicon.png" />
+    <meta property="og:image" id="meta-image" content="https://nickel.gay/static/favicon.png" />
     <title>nickel.gay</title>
     {% tailwind_css %}
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet" />
@@ -60,27 +60,18 @@
         if (ul.childNodes[property].nodeName === "LI") {
           item = ul.childNodes[property].childNodes[1]
           href = new URL(item.href)
-          if (href.pathname === (path)) {
-            item.classList = "inline-block py-2 px-4 text-black font-bold no-underline"
-          }
-        }
-      }
-    </script>
-
-    <script>
-      navContent = document.getElementById("nav-content")
-      ul = navContent.childNodes[1]
-      path = "{{ request.get_full_path }}"
-      for (const property in ul.childNodes) {
-        if (ul.childNodes[property].nodeName === "LI") {
-          item = ul.childNodes[property].childNodes[1]
-          href = new URL(item.href)
+          host = "{{ request.get_host }}"
           if (href.pathname === (path) && host === href.host) {
             item.classList = "inline-block py-2 px-4 text-black font-bold no-underline"
           }
         }
       }
+
+      metaImage = document.getElementById("meta-image")
+      url = new URL("{{ request.get_host }}")
+      metaImage.content = `http://${url.href}/static/favicon.png`
     </script>
+    
     <div class="pt-24">
       <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
