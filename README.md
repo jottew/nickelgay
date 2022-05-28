@@ -1,5 +1,5 @@
 # nickel.gay
-The repository for nickel.gay (not released yet)
+The repository for nickel.gay
 
 # Showcase:
 ![home1](showcase/home1.png)
