@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load tailwind_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +16,7 @@
     <title>nickel.gay</title>
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.png' %}">
 
-    {% tailwind_css %}
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
     <link rel="icon" type="image/png" href="{% static 'favicon.png' %}"/>
@@ -139,10 +138,6 @@
         }
       }
     }
-
-    metaImage = document.getElementById("meta-image")
-    url = new URL("{{ request.get_host }}")
-    metaImage.content = `http://${url.href}/static/favicon.png`
   </script>
 
   <div class="px-2">

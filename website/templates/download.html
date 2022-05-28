@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load tailwind_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +15,7 @@
     <meta property="og:image" content="{% static 'favicon.png' %}" />
     <title>nickel.gay</title>
 
-    {% tailwind_css %}
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="{% static 'favicon.png' %}"/>
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />

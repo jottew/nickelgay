@@ -2,8 +2,11 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.urls import path
 from django.views.generic.base import RedirectView
+from django.conf.urls import handler404
 
 from . import views, api, account
+
+handler404 = 'website.views.page_not_found'
 
 urlpatterns = [
     path("", views.home_view),

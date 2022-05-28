@@ -1,7 +1,6 @@
-import json
-
 from django.http import *
 from django.shortcuts import render
+from django.template import RequestContext
 from .api import valid_filetypes
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext, activate, get_language_info
@@ -131,6 +130,14 @@ def create_nav(request: HttpRequest):
     navs = dict([(v["name"], k) for k, v in new_nav.items()])
 
     return navs.items()
+
+
+def page_not_found(request):
+    return render(
+        request,
+        '404.html',
+        status=404
+    )
 
 
 def home_view(request: HttpRequest):

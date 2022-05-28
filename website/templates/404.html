@@ -1,0 +1,43 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:title" content="nickel.gay | 404" />
+    <meta property="og:site_name" content="nickel.gay" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="The swiss knife of media utility" />
+    <meta property="og:url" content="https://nickel.gay" />
+    <meta property="theme-color" content="#9921E8" />
+    <meta property="og:image" content="{% static 'favicon.png' %}" />
+    <title>nickel.gay</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'favicon.png' %}"/>
+    <style>
+        .body-bg {
+            background-color: #9921e8;
+            background-image: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);
+        }
+    </style>
+</head>
+<body class="body-bg min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0" style="font-family:'Lato',sans-serif;">
+
+    <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+        <section class="flex items-center flex-col mt-8">
+            <h3 class="font-bold text-6xl">404</h3>
+            <p class="text-gray-600 pt-2">This is probably not the page you're looking for</p>
+        </section>
+
+        <div class="flex items-center flex-col pt-8">
+            <a type="button" href="../" class="text-white bg-gradient-to-br to-blue-500 from-purple-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                Go back home
+            </a>
+        </div>
+    </main>
+</body>
+</html>
